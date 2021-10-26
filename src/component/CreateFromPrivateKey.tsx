@@ -25,6 +25,10 @@ const CreateFromPrivateKey = () => {
   }
   return (
     <div>
+      <input 
+      onChange={(e) => setPrivateKey(e.target.value)}
+      className="shadow rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
+      <br />
       <button onClick={accountCreateFromPrivateKey}>
         秘密鍵からアカウントを作成する
       </button>
