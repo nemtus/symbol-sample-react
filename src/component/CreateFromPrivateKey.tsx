@@ -3,37 +3,30 @@ import { Account, NetworkType } from 'symbol-sdk'
 
 const CreateFromPrivateKey = () => {
   const [privateKey, setPrivateKey] = useState('')
+  const [address, setAddress] = useState('')
+  const [publicKey, setPublicKey] = useState('')
   console.log('秘密鍵', privateKey)
-
-  const sampleUseState = () => {
-    setPrivateKey(
-      '7B20E0615755D6EEDA0DAB45E5D8A4331EC603F8702D7F4E6171FB81CF83CF78'
-    )
-  }
 
   const accountCreateFromPrivateKey = () => {
     const account = Account.createFromPrivateKey(
       privateKey,
       NetworkType.TEST_NET
     )
-    console.log(
-      'Your account address is:',
-      account.address.pretty(),
-      'and its private key',
-      account.privateKey
-    )
+    setAddress(account.address.pretty())
+    setPublicKey(account.publicKey)
   }
   return (
     <div>
-      <input 
-      onChange={(e) => setPrivateKey(e.target.value)}
-      className="shadow rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
+      <input
+        onChange={(e) => setPrivateKey(e.target.value)}
+        className="shadow rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
       <br />
       <button onClick={accountCreateFromPrivateKey}>
         秘密鍵からアカウントを作成する
       </button>
-      <br />
-      <button onClick={sampleUseState}>useStateを試してみる</button>
+      <p>アドレス: {address}</p>
+      <p>公開鍵: {publicKey}</p>
     </div>
   )
 }

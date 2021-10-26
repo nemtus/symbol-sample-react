@@ -1,7 +1,7 @@
 import logo from './logo.svg'
 import './App.css'
 import CreateFromPrivateKey from './component/CreateFromPrivateKey'
-import GenerateNewAccount from './component/GenerateNewAccount'
+// import GenerateNewAccount from './component/GenerateNewAccount'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <CreateFromPrivateKey></CreateFromPrivateKey>
-        <GenerateNewAccount></GenerateNewAccount>
+        {/* <GenerateNewAccount></GenerateNewAccount> */}
       </header>
     </div>
   )
