@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
   Account,
   NetworkType,
@@ -9,7 +9,9 @@ import {
 
 const CreateFromPrivateKey = () => {
   const [privateKey, setPrivateKey] = useState('')
-  const [address, setAddress] = useState('')
+  const [address, setAddress] = useState(
+    'TCUKQQFP6XTIIA2WLHUUGHVFPE62OIMGWUP7SHY'
+  )
   const [publicKey, setPublicKey] = useState('')
   const [mosaics, setMosaics] = useState<Mosaic[]>([])
   const [importance, setImportance] = useState({
@@ -17,22 +19,21 @@ const CreateFromPrivateKey = () => {
     higher: 0,
   })
 
+
+
   const mosaicList = () => {
     const items = []
     for (let i = 0; i < mosaics.length; i++) {
       items.push(
-        <li key={mosaics[i].id.id.higher}>
-          モザイクハイター{mosaics[i].amount.higher}<br/>
-          モザイクローワ{mosaics[i].amount.lower}<br/>
-          モザイクIDローワ{mosaics[i].id.id.lower}<br/>
-          モザイクIDハイター{mosaics[i].id.id.higher}
+        <li key={mosaics[i].id.id.lower}>
+          モザイクID: {mosaics[i].id.id.toHex()}------モザイクの総量: {mosaics[i].amount.toString()}
         </li>
       )
     }
     return <ul>{items}</ul>
   }
 
-  const accountInfo = () => {
+  const accountInfo = useCallback(() => {
     const accountAddress = Address.createFromRawAddress(address)
     const nodeUrl = 'http://ngl-dual-101.testnet.symboldev.network:3000'
     const repositoryFactory = new RepositoryFactoryHttp(nodeUrl)
@@ -40,14 +41,19 @@ const CreateFromPrivateKey = () => {
     accountHttp.getAccountInfo(accountAddress).subscribe(
       (accountInfo) => {
         console.log(accountInfo)
+        setPublicKey(accountInfo.publicKey)
         setMosaics(accountInfo.mosaics)
         setImportance(accountInfo.importance)
       },
       (err) => console.error(err)
     )
-  }
+  }, [address])
 
-  const accountCreateFromPrivateKey = () => {
+  useEffect(() => {
+    accountInfo()
+  }, [address, accountInfo])
+
+  function accountCreateFromPrivateKey() {
     const account = Account.createFromPrivateKey(
       privateKey,
       NetworkType.TEST_NET
@@ -67,12 +73,10 @@ const CreateFromPrivateKey = () => {
       </button>
       <p>アドレス: {address}</p>
       <p>公開鍵: {publicKey}</p>
-      <button onClick={accountInfo}>アカウント情報を取得する</button>
       {mosaics && importance && (
         <>
           {mosaicList()}
-          <p>インポータンスローワー{importance.lower}</p>
-          <p>インポータンスハイター{importance.higher}</p>
+          <p>インポータンス: {importance.toString()}</p>
         </>
       )}
     </div>
