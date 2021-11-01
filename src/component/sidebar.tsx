@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CreateFromPrivateKey from './CreateFromPrivateKey'
 
-const sidebar = () => {
+const SideBar = () => {
+  const [isClosed, setClosed] = useState(false)
   return (
-    <div className="bg-gray-800 h-screen w-64 px-4 border-r bg-white">
-      <div className="px-8">
-        <div className="h-16 w-full flex items-center text-white">
-          symbol-react
-        </div>
-        <ul className="mt-12">
-          <li className="flex w-full justify-between text-white hover:text-gray-500 cursor-pointer items-center mb-6">
+    <div className="flex bg-gray-100 w-full">
+      {!isClosed && (
+        <aside
+          aria-hidden={isClosed}
+          className="bg-gray-800 w-64 min-h-screen flex flex-col text-white"
+        >
+          <div className="border-r border-b px-4 h-10 flex items-center justify-between">
+            <span className="text-blue py-2">Symbol-React</span>
+          </div>
+
+          <div className="border-r py-4 flex-grow relative">
+            <nav>
+            <ul className="mt-12">
+          <li className="flex w-full justify-between text-white hover:text-gray-500 cursor-pointer items-center mb-6 m-4">
             <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +36,7 @@ const sidebar = () => {
               <span className="text-sm  ml-2">Home</span>
             </div>
           </li>
-          <li className="flex w-full justify-between text-white hover:text-gray-500 cursor-pointer items-center">
+          <li className="flex w-full justify-between text-white hover:text-gray-500 cursor-pointer items-center  m-4">
             <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,9 +56,63 @@ const sidebar = () => {
             </div>
           </li>
         </ul>
-      </div>
+            </nav>
+          </div>
+        </aside>
+      )}
+
+      <main className="flex-grow flex flex-col min-h-screen w-full">
+        <header className="bg-white border-b h-10 flex items-center justify-center">
+          {isClosed ? (
+            <button
+              tabIndex={1}
+              className="w-10 p-1"
+              aria-label="Open menu"
+              title="Open menu"
+              onClick={() => setClosed(false)}
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          ) : (
+            <button
+              tabIndex={1}
+              className="w-10 p-1"
+              aria-label="Close menu"
+              title="Close menu"
+              onClick={() => setClosed(true)}
+            >
+              <svg
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          )}
+
+          <div className="flex flex-grow items-center justify-between px-3">
+            <h1 className="text-lg">Home</h1>
+            <button className="text-blue-700 underline">Log in</button>
+          </div>
+        </header>
+        <CreateFromPrivateKey></CreateFromPrivateKey>
+      </main>
     </div>
   )
 }
 
-export default sidebar
+export default SideBar

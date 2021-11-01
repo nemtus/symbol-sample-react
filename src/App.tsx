@@ -1,13 +1,11 @@
-import CreateFromPrivateKey from './component/CreateFromPrivateKey'
-import Sidebar from './component/sidebar'
+import SideBar from './component/SideBar'
 // import GenerateNewAccount from './component/GenerateNewAccount'
 
 function App() {
   return (
     <div>
       <div className="flex flex-no-wrap">
-        <Sidebar></Sidebar>
-        <CreateFromPrivateKey></CreateFromPrivateKey>
+        <SideBar></SideBar>
       </div>
     </div>
   )
