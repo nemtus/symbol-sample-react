@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import CreateFromPrivateKey from './CreateFromPrivateKey'
 import Symbol from '../images/logo-symbol-color.png'
 import NemTus from '../images/logo-nemtus-color.png'
+import Home from './Home'
 
 const SideBar = () => {
   const [isClosed, setClosed] = useState(false)
+  const [isHome, setIsHome] = useState(false)
   return (
     <div className="flex bg-gray-100 w-full">
       {!isClosed && (
@@ -20,7 +22,7 @@ const SideBar = () => {
             <nav>
               <ul className="mt-12">
                 <li className="flex w-full justify-between text-white hover:text-gray-500 cursor-pointer items-center mb-6 m-4">
-                  <div className="flex items-center">
+                  <button className="flex items-center" onClick={() => {setIsHome(false)}}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -36,10 +38,10 @@ const SideBar = () => {
                       />
                     </svg>
                     <span className="text-sm  ml-2">Home</span>
-                  </div>
+                  </button>
                 </li>
                 <li className="flex w-full justify-between text-white hover:text-gray-500 cursor-pointer items-center  m-4">
-                  <div className="flex items-center">
+                  <button className="flex items-center" onClick={() => {setIsHome(true)}}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -55,7 +57,7 @@ const SideBar = () => {
                       />
                     </svg>
                     <span className="text-sm  ml-2">Account</span>
-                  </div>
+                  </button>
                 </li>
               </ul>
             </nav>
@@ -107,17 +109,26 @@ const SideBar = () => {
           )}
 
           <div className="flex flex-grow items-center px-3">
-            <h1 className="text-lg col-start-1 col-end-3">Home</h1>
+            <h1 className="text-lg col-start-1 col-end-3">{!isHome ? "Home" : "Account"}</h1>
             <div className="flex-grow"></div>
-            <a href="https://docs.symbolplatform.com/ja/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://docs.symbolplatform.com/ja/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={Symbol} alt="symbol" className="col-end-7 col-span-2" />
             </a>
-            <a href="https://nemtus.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://nemtus.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img src={NemTus} alt="nemtus" className="w-6 m-2" />
             </a>
           </div>
         </header>
-        <CreateFromPrivateKey></CreateFromPrivateKey>
+        {isHome && <CreateFromPrivateKey></CreateFromPrivateKey>}
+        {!isHome && <Home></Home>}
       </main>
     </div>
   )
