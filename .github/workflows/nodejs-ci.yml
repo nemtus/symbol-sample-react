@@ -1,4 +1,4 @@
-name: Firebase CD
+name: Nodejs CI
 
 on: [pull_request]
 
