@@ -26,6 +26,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build-production": "dotenv -e .env.production craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv-cli": "^4.1.0"
   }
 }

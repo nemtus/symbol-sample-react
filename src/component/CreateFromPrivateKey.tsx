@@ -34,8 +34,8 @@ const CreateFromPrivateKey = () => {
 
   const accountInfo = useCallback(() => {
     const accountAddress = Address.createFromRawAddress(address)
-    const nodeUrl = 'https://sym-test.opening-line.jp:3001/'
-    const repositoryFactory = new RepositoryFactoryHttp(nodeUrl)
+    const nodeUrl = process.env.REACT_APP_NODE
+    const repositoryFactory = new RepositoryFactoryHttp(nodeUrl!)
     const accountHttp = repositoryFactory.createAccountRepository()
     accountHttp.getAccountInfo(accountAddress).subscribe(
       (accountInfo) => {
