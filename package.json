@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv-cli": "^4.1.0"
+    "dotenv-cli": "^4.1.0",
+    "firebase-tools": "^9.22.0"
   }
 }
