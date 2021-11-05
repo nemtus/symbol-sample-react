@@ -76,7 +76,7 @@ const CreateFromPrivateKey = () => {
         onClick={accountCreateFromPrivateKey}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        秘密鍵からアカウントを作成する
+        秘密鍵からアカウントを作成
       </button>
       <div className="mt-5 shadow rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
         <p>アドレス: {address}</p>
